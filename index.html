@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
-</head>
-<body>
-</body>
-<script src="./main.js"></script>
+  </head>
+  <body>
+    <header class="flex-row justify-between w-screen border-bottom">
+      <picture class="p-10">
+        <img
+          src="https://media.giphy.com/media/ZNo3OCM9CoEVz71ilQ/giphy.gif"
+          alt="Logo"
+          width="100"
+        />
+      </picture>
+      <nav class="flex-row list-none">
+        <li class="px-10">
+          <a
+            class="link-none"
+            href="https://github.com/BaraaNazar/rock_paper_scissors"
+            target="_blank"
+            >code</a
+          >
+        </li>
+        <li class="px-10">
+          <a
+            class="link-none"
+            href="https://github.com/BaraaNazar"
+            target="_blank"
+            >author</a
+          >
+        </li>
+      </nav>
+    </header>
+    <main>
+      <h1>Rock - Paper - Scissors</h1>
+      <p class="content">content display</p>
+      <p class="backStory">backStory</p>
+      <p class="round">round number</p>
+
+      <input
+        type="text"
+        class="player-choice-input"
+        placeholder="Type your choice here..."
+      />
+      <button class="choice-button">choice</button>
+      <p class="notify">notification</p>
+      <p class="player-choice">Player choice</p>
+      <p class="computer-choice">Computer choice</p>
+      <p class="results">result</p>
+      <p class="resultsNum">com| player</p>
+    </main>
+  </body>
+  <script src="./main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      game();
+    });
+  </script>
 </html>

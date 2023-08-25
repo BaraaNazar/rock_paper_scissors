@@ -1,5 +1,16 @@
 'use strict';
 
+const playerChoiceInput = document.querySelector('.player-choice-input').value;
+const content = document.querySelector('.content');
+const choiceButtom = document.querySelector('.choice-button');
+const notify = document.querySelector('.notify');
+const playerChoice = document.querySelector('.player-choice');
+const computerChoice = document.querySelector('.computer-choice');
+const results = document.querySelector('.results');
+const resultsNum = document.querySelector('.resultsNum');
+const backStory = document.querySelector('.backStory');
+const round = document.querySelector('.round');
+
 const backstory = [
   '🎮 In the heart of the digital realm, three playful characters emerged...',
   '🤝 The game unfolded, echoing with cheers and excitement...',
@@ -11,7 +22,7 @@ const backstory = [
 let backstoryIndex = 0;
 
 function displayBackstory() {
-  console.log(backstory[backstoryIndex]);
+  backStory.textContent = backstory[backstoryIndex];
   backstoryIndex++;
 }
 
@@ -26,17 +37,19 @@ function getPlayerChoice() {
   let playerChoice;
 
   do {
-    playerChoice = prompt(
-      "Hey! This is a fun game on Rock 🤜, Paper 🫲 and Scissors ✌️.\nLet's begin!!! 🏁🏁🏁 \nWrite EITHER Rock, Paper, or Scissors and press 🆗 please!\nYou need to do this 5 times! GOOD LUCK!"
-    );
-
+    content.textContent =
+      "Hey! This is a fun game on Rock 🤜, Paper 🫲 and Scissors ✌️.\nLet's begin!!! 🏁🏁🏁 \nWrite EITHER Rock, Paper, or Scissors and press 🆗 please!\nYou need to do this 5 times! GOOD LUCK!";
+    choiceButtom.addEventListener('click', () => {
+      playerChoice = playerChoiceInput;
+    });
     if (playerChoice === null) {
       // Handle the cancel case
-      alert('You clicked Cancel. Please enter a choice.');
+      notify.textContent = 'You clicked Cancel. Please enter a choice.';
     } else {
       playerChoice = playerChoice.toLowerCase().trim(); // Convert to lowercase
       if (!['rock', 'paper', 'scissors'].includes(playerChoice)) {
-        alert("Oops! This is not one of 'rock', 'paper', or 'scissors'🧨");
+        notify.textContent =
+          "Oops! This is not one of 'rock', 'paper', or 'scissors'🧨";
       }
     }
   } while (!['rock', 'paper', 'scissors'].includes(playerChoice));
@@ -86,15 +99,15 @@ function game() {
 
   for (let i = 0; i < 5; i++) {
     displayBackstory(); // Display backstory at the beginning of each round
-    console.log(`Round ${i + 1} - Let the game begin!`);
+    round.textContent = `Round ${i + 1} - Let the game begin!`;
     const playerSelection = getPlayerChoice();
     const computerSelection = computerPlay();
 
-    console.log(`Player chose: ${playerSelection}`);
-    console.log(`Computer chose: ${computerSelection}`);
+    playerChoice.textContent = `Player chose: ${playerSelection}`;
+    computerChoice.textContent = `Computer chose: ${computerSelection}`;
 
     const roundResult = playRound(playerSelection, computerSelection);
-    console.log(roundResult);
+    results.textContent = roundResult;
 
     if (roundResult.includes('win')) {
       playerScore++;
@@ -102,35 +115,24 @@ function game() {
       computerScore++;
     }
 
-    console.log(
-      `Player Score : ${playerScore} | Computer Score: ${computerScore}`
-    );
-    console.log('-------------------------------');
-    console.log('-------------------------------');
+    resultsNum.textContent = `Player Score : ${playerScore} | Computer Score: ${computerScore}`;
   }
 
   if (playerScore > computerScore) {
-    console.log('Congratulations! You won the game! 🏆🥇🎉');
+    content.textContent = 'Congratulations! You won the game! 🏆🥇🎉';
   } else if (playerScore < computerScore) {
-    console.log('Sorry, you lost the game! 🧨🧨 But it was a nice try!');
+    content.textContent =
+      'Sorry, you lost the game! 🧨🧨 But it was a nice try!';
   } else {
-    console.log('The game ends in a tie! 🤝');
+    content.textContent = 'The game ends in a tie! 🤝';
   }
 }
-
 game();
 
 //Start a new game
-const newGame = prompt('Do you want to play again? (yes or no)🏁🤜🫲✌️');
-
-if (newGame !== null) {
-  // Check if newGame is not null
-  const lowerCaseNewGame = newGame.toLowerCase();
-  if (lowerCaseNewGame === 'yes') {
-    location.reload();
-  } else {
-    console.log('Thank you for playing!');
-  }
-} else {
-  console.log('Thank you for playing!');
-}
+// const playAgain = window.confirm('Do you want to play again? (yes or no)');
+// if (playAgain) {
+//   location.reload();
+// } else {
+//   console.log('Thank you for playing!');
+// }
